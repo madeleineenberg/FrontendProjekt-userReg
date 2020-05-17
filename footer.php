@@ -26,6 +26,7 @@
 </footer>
 <!-- Added here for cart full page -->
 <script type="application/javascript" src="../order/update-localstorage.js"></script>
+<script type="application/javascript" src="../registration/password-check.js"></script>
 <script type="application/javascript" src="../order/validate_order.js"></script>
 <script type="application/javascript" src="../order/cart-icon.js"></script>
 <script type="application/javascript" src="../order/updateProduct.js"></script>
