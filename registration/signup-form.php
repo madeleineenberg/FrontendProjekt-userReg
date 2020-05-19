@@ -31,34 +31,34 @@
 
       <div class="reg_field-street form-container__box">
         <label for="street">Gatuadress:</label><br>
-        <input type="text" name="street" id="reg-street"  class="form-container__box-input"required >
+        <input type="text" name="street" id="reg-street"  class="form-container__box-input" >
         <br>
         <span class="streetErrorText"></span>
       </div>
 
       <div class="reg_field-postalcode form-container__box">
         <label for="zip">Postnr:</label><br>
-        <input type="text" name="zip" id="reg-zip" class="form-container__box-input"required >
+        <input type="text" name="zip" id="reg-zip" class="form-container__box-input" >
         <br>
         <span class="zipErrorText"></span>
       </div>
 
       <div class="reg_field-city form-container__box">
         <label for="city">Ort:</label><br>
-        <input type="text" name="city" id="reg-city" class="form-container__box-input" required>
+        <input type="text" name="city" id="reg-city" class="form-container__box-input">
         <br>
         <span class="cityErrorText"></span>
       </div>
 
       <div class="reg_field-pwd form-container__box">
       <label for="password">Lösenord:</label><br>
-      <input type="password" name="password" id="reg-pwd" placeholder="Ange lösenord" class="form-container__box-input" required><br>
+      <input type="password" name="password" id="reg-pwd" placeholder="Ange lösenord" class="form-container__box-input"><br>
       <span class="passwordValidationText" id="pwd-msg"></span>
       </div>
 
       <div class="reg_field-pwd-repeat form-container__box">
       <label for="password-repeat">Lösenord:</label><br>
-      <input type="password" name="passwordRepeat" id="reg-pwd-repeat" placeholder="Repetera lösenord"  class="form-container__box-input" required><br>
+      <input type="password" name="passwordRepeat" id="reg-pwd-repeat" placeholder="Repetera lösenord"  class="form-container__box-input"><br>
       <span class="passwordErrorTextRepeat"></span>
       </div>
 
