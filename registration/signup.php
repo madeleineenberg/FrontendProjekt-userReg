@@ -1,14 +1,22 @@
 <?php
+
+require_once '../second_header_extern.php';
 require_once '../config/db.php';
+
+?>
+
+</header>
+<main>
+<?php
 
 $errors = "";
 $error = array();
 $name = $email = $phone = $street = $zip = $city = $password = "";
 
-//Lyssnar efter POST-request
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') :
 
-  //Kontrollerar för varje fält om det är ifyllt eller tomt
+ 
 
   if (empty($_POST['name'])) {
     $error[] =  "Du måste ange namn";
@@ -48,22 +56,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') :
   }
   if (empty($_POST['password'])) {
     $error[] =  "Du måste ange ett lösenord";
-  }
-  if(isset($_POST['password'] )) {
-    if($_POST['password'] != $_POST['password-repeat']) {
-      $error[] = "Dina lösenord matchar inte varandra";
-      echo "Dina lösenord matchar inte varandra";
-    }
+  }else if (isset($_POST['password'])){
     $password = $_POST['password'];
-  } 
+  }
 
-
-
-
-  //Om det inte finns några felmeddelanden
+  
   if (count($error) == 0) {
 
-    //Skicka beställning till databasen
+
     $sql = "INSERT INTO webshop_customers (name, email, phone, street, zip, city, password )
             VALUES (:name, :email, :phone, :street, :zip, :city, :password)";
 
@@ -79,16 +79,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') :
     $stmt->execute();
   }
 
-  //Om det finns några fel
+ 
   if (count($error) > 0) {
 
     foreach ($error as $e) {
       $errors .= "<div class='error'><p> $e </p></div><br />";
     }
-  }
+  }else {
+    $errors = "<div class='suc'><p> Du är registrerad!</p></div>";
+}
 
 
-  header('Location:signup-form.php');
+
+
 
 endif;
 
@@ -100,4 +103,8 @@ function test_input($data)
   return $data;
 }
 
+require_once "signup-form.php";
+require_once "../footer.php";
 
+
+?>
