@@ -9,6 +9,8 @@ require_once '../config/db.php';
 <main>
 <?php
 
+
+
 $errors = "";
 $error = array();
 $name = $email = $phone = $street = $zip = $city = $password = "";
@@ -30,6 +32,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') :
   } else if (isset($_POST['email'])) {
     $email = $_POST['email'];
   }
+
+$user_check =  "SELECT * FROM webshop_customers WHERE  email='$email' LIMIT 1";
+$statment = $db->prepare($user_check);
+$statment->execute();
+if ($statment->rowCount() > 0) {
+  $error[] = "Användaren finns redan, testa en annan mailadress eller logga in";
+} else {
+  $email = $_POST['email'];
+}
+
 
   if (empty($_POST['phone'])) {
     $error[] =  "Du måste ange telefonnummer";
@@ -57,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') :
   if (empty($_POST['password'])) {
     $error[] =  "Du måste ange ett lösenord";
   }else if (isset($_POST['password'])){
-    $password = $_POST['password'];
+    $password = md5($_POST['password']);
   }
 
   
@@ -86,7 +98,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') :
       $errors .= "<div class='error'><p> $e </p></div><br />";
     }
   }else {
-    $errors = "<div class='suc'><p> Du är registrerad!</p></div>";
+    $errors = "<div class='reg-suc'><p> Du är registrerad!</p></div>";
 }
 
 

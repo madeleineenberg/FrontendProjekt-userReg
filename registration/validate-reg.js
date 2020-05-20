@@ -4,6 +4,7 @@ let emailErrText = document.querySelector(".emailErrorText");
 let phoneErrText = document.querySelector(".phoneErrorText");
 let streetErrText = document.querySelector(".streetErrorText");
 let zipErrText = document.querySelector(".zipErrorText");
+let cityErrText = document.querySelector(".cityErrorText");
 
 let pwd1 = document.getElementById("reg-pwd");
 let pwd2 = document.getElementById("reg-pwd-repeat");
@@ -14,6 +15,7 @@ function validateMyForm(form) {
   let phone = document.getElementById("reg-phone").value;
   let street = document.getElementById("reg-street").value;
   let zip = document.getElementById("reg-zip").value;
+  let city = document.getElementById("reg-city").value;
 
   if (name.length === 0 || name.length < 2 || name.length > 25) {
     nameErrText.innerHTML =
@@ -46,7 +48,7 @@ function validateMyForm(form) {
     form.phone.focus();
     return false;
   }
-  if (new RegExp(/[^0-9\s-]/).test(phone) == true) {
+  if (new RegExp(/[^0-9\s-]/).test(phone)) {
     phoneErrText.innerHTML = "Bara siffror är tillåtna";
     form.phone.focus();
     return false;
@@ -57,11 +59,34 @@ function validateMyForm(form) {
     return false;
   }
 
-  if (new RegExp(/[^a-öA-Ö\s0-9.,:]/).test(street) == true) {
+  if (new RegExp(/[^a-öA-Ö\s0-9.,:]/).test(street)) {
     streetErrText.innerHTML = "Din adress innehåller förbjudna tecken ";
     form.street.focus();
     return false;
   }
+
+  if (zip.length === 0 || zip.length > 6) {
+    zipErrText.innerHTML = "Obligatoriskt fält, max 6 tecken";
+    form.zip.focus();
+    return false;
+  }
+  if (new RegExp(/[^0-9\s-]/).test(zip)) {
+    zipErrText.innerHTML = "Bara siffror är tillåtna";
+    form.zip.focus();
+    return false;
+  }
+  if (city.length === 0 || city.length > 25) {
+    cityErrText.innerHTML = "Obligatoriskt fält, max 25 tecken";
+    form.city.focus();
+    return false;
+  }
+
+  if (new RegExp(/[^a-öA-Ö\s.,:]/).test(city)) {
+    cityErrText.innerHTML = "Fältet innehåller förbjudna tecken";
+    form.city.focus();
+    return false;
+  }
+
   if (pwd1.value != pwd2.value) {
     pwdErrText.innerHTML = "Lösenorden måste matcha";
     form.passwordRepeat.focus();
