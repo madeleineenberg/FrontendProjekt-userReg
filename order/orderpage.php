@@ -6,6 +6,28 @@ require_once '../config/db.php';
 </header>
 <main>
 
+<?php session_start();
+
+if(!isset($_SESSION['email'])){
+$name = $email = $phone = $street = $zip = $city = "";
+}
+if(isset($_SESSION['email'])){
+  $email = $_SESSION['email'];
+  $sql = "SELECT * FROM webshop_customers WHERE  email='$email' ";
+  $stmt = $db->prepare($sql);
+  $stmt->execute();
+
+  while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+      $name = $row['name'];
+      $email = $row['email'];
+      $phone = $row['phone'];
+      $street = $row['street'];
+      $zip = $row['zip'];
+      $city = $row['city'];
+  }
+}
+?>
+
 <!--Varukorgen-->
 <section class="shopping_container">
   <section id="shoppingcart">
@@ -66,42 +88,42 @@ require_once '../config/db.php';
       <!--Input-fält som kunden fyller i-->
       <div class="order_field-name form-container__box">
         <label for="name">För- och efternamn:</label><br>
-        <input type="text" name="name" id="name" onblur="validateName()" class="form-container__box-input" required>
+        <input type="text" name="name" id="name" onblur="validateName()" value="<?php echo $name;?>" class="form-container__box-input" required>
         <br>
         <span class="nameValidationText"></span>
       </div>
 
       <div class="order_field-email form-container__box">
         <label for="email">E-post:</label><br>
-        <input type="text" name="email" id="email" onblur="validateEmail()" class="form-container__box-input" placeholder="exempel@test.com" required>
+        <input type="text" name="email" id="email" onblur="validateEmail()" class="form-container__box-input" value="<?php echo $email;?>"placeholder="exempel@test.com" required>
         <br>
         <span class="emailValidationText"></span>
       </div>
 
       <div class="order_field-phone form-container__box">
         <label for="phone">Mobilnummer:</label><br>
-        <input type="text" name="phone" id="phone" onblur="validatePhone()" class="form-container__box-input" placeholder="(ex. 0701234567)" required>
+        <input type="text" name="phone" id="phone" onblur="validatePhone()" class="form-container__box-input" value="<?php echo $phone;?>" placeholder="(ex. 0701234567)" required>
         <br>
         <span class="phoneValidationText"></span>
       </div>
 
       <div class="order_field-street form-container__box">
         <label for="street">Gatuadress:</label><br>
-        <input type="text" name="street" id="street" onblur="validateStreet() " class="form-container__box-input" required>
+        <input type="text" name="street" id="street" onblur="validateStreet() " value="<?php echo $street;?>"class="form-container__box-input" required>
         <br>
         <span class="streetValidationText"></span>
       </div>
 
       <div class="order_field-postalcode form-container__box">
         <label for="zip">Postnr:</label><br>
-        <input type="text" name="zip" id="zip" oninput="validateZipcode()" placeholder="(ex. 123 45)" class="form-container__box-input" required>
+        <input type="text" name="zip" id="zip" oninput="validateZipcode()" value="<?php echo $zip;?>"placeholder="(ex. 123 45)" class="form-container__box-input" required>
         <br>
         <span class="zipcodeValidationText"></span>
       </div>
 
       <div class="order_field-city form-container__box">
         <label for="city">Ort:</label><br>
-        <input type="text" name="city" id="city" onblur="validateCity()" class="form-container__box-input" required>
+        <input type="text" name="city" id="city" onblur="validateCity()" value="<?php echo $city;?>"class="form-container__box-input" required>
         <br>
         <span class="cityValidationText"></span>
       </div>

@@ -10,7 +10,7 @@ require_once '../config/db.php';
 
 
 <?php
-
+session_start();
 $errors = "";
 $error = array();
 $email = $password = "";
@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
         if ($stmt->rowCount() === 1){
             $_SESSION['email'] = $email;
             $_SESSION['success'] = "Du är inloggad";
-            header("Location: ../index.php");
+            header("Location: user-page.php");
         
         }
         else{
