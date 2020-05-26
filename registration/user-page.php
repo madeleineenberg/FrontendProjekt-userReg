@@ -43,12 +43,12 @@ if(isset($_SESSION['email'])):
         $city = $row['city'];
 
         $user_info = "<ul class='user_info-list'>
-        <li class='user_info-list-item'>NAMN: $name</li>
-        <li class='user_info-list-item'>E-POST: $email</li>
-        <li class='user_info-list-item'>TELEFON: $phone</li>
-        <li class='user_info-list-item'>ADRESS: $street</li>
-        <li class='user_info-list-item'>POSTNUMMER: $zip</li>
-        <li class='user_info-list-item'>ORT: $city</li>
+        <li class='user_info-list-item'><strong>NAMN:</strong> $name</li>
+        <li class='user_info-list-item'><strong>E-POST:</strong> $email</li>
+        <li class='user_info-list-item'><strong>TELEFON:</strong> $phone</li>
+        <li class='user_info-list-item'><strong>ADRESS:</strong> $street</li>
+        <li class='user_info-list-item'><strong>POSTNUMMER:</strong> $zip</li>
+        <li class='user_info-list-item'><strong>ORT:</strong> $city</li>
         </ul>
         ";
     }
@@ -124,7 +124,10 @@ if(isset($_SESSION['email'])):
         $output .= "</table>";
 
 
+    }else{
+      $output = "";
     }
+    
     $orders_complete = "SELECT * FROM webshop_orderscomplete WHERE  email='$email' ";
     $statment_c = $db->prepare($orders_complete);
     $statment_c->execute();
@@ -196,14 +199,14 @@ if(isset($_SESSION['email'])):
 
 <section class="user_page-container">
 <h2 class="user_page-title">Välkommen  <?php echo $name;?>! </h2>
-<h3>Dina uppgifter: </h3>
+<h3 class="user_page-info">Dina uppgifter: </h3>
 <?php echo $user_info; ?>
-<h3 class="user_page-title">Pågående beställningar:</h3>
+<h3 class="user_page-sub-title">Pågående beställningar:</h3>
 <?php echo $output; ?>
-<h3 class="user_page-title">Slutförda beställningar:</h3>
+<h3 class="user_page-sub-title">Slutförda beställningar:</h3>
 <?php echo $show_complete_orders; ?>
 
-<a href="logout.php">Logga ut</a>
+<a href="logout.php" class="logout">Logga ut</a>
 </section>
 
 <?php endif; ?>

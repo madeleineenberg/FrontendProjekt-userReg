@@ -87,6 +87,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
         <input type="submit" value="Logga in" class="form-container__submit-button" id="login_form-container__submit-button">
 
       </div>
+      <div>
+      <p><a href="enter-email.php">Glömt ditt lösenord?</a></p>
+      </div>
     </form>
 
     <?php require_once "../footer.php";?>
