@@ -24,6 +24,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     if(empty($password) || empty($repeat_password)){
         $error[] = "Du måste ange ett lösenord i båda fälten";
     }
+    if( $password != $repeat_password){
+      $error[] = "Lösenorden måste matcha varandra!";
+    }
 
     if (count($error) == 0){
         $sql = "SELECT email FROM webshop_password_reset WHERE token='$token' LIMIT 1";
